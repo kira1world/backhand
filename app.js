@@ -1,3 +1,4 @@
+import cors from "cors";
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -14,10 +15,11 @@ mongoose
   .catch((e) => console.log(e));
 
 //! Cors config
-const corsOptions = {
-  origin: ["http://localhost:5173"],
-};
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: "https://amazing-figolla-925471.netlify.app/",
+  credentials: true
+}));
+
 //!Middlewares
 app.use(express.json()); //?Pass incoming json data
 //!Routes
