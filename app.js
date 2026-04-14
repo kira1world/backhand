@@ -16,16 +16,21 @@ mongoose
 
 //! Cors config
 app.use(cors({
-  origin: "https://amazing-figolla-925471.netlify.app/",
+  origin: [
+    "http://localhost:5173",
+    "https://amazing-figolla-925471.netlify.app"
+  ],
   credentials: true
 }));
+
+// app.use(express.json());
 
 //!Middlewares
 app.use(express.json()); //?Pass incoming json data
 //!Routes
-app.use("/", userRouter);
-app.use("/", categoryRouter);
-app.use("/", transactionRouter);
+app.use("/Users", userRouter);
+app.use("/Category", categoryRouter);
+app.use("Tranaction", transactionRouter);
 //! Error
 app.use(errorHandler);
 
@@ -34,3 +39,6 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () =>
   console.log(`Server is running on this port... ${PORT} `)
 );
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
